@@ -47,7 +47,6 @@ For a detailed introduction, full list of features and architecture overview ple
     - [Azure Container Instance](#azure-container-instance)
     - [Google Compute Engine Instance](#google-compute-engine-instance)
     - [Heroku](#heroku)
-    - [Gitpod](#gitpod)
 - [Demo](#demo)
 - [Documentation](#documentation)
     - [Node.js version compatibility](#nodejs-version-compatibility)
