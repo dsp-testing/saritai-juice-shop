@@ -201,6 +201,24 @@ describe('insecurity', () => {
     })
   })
 
+  describe('decode', () => {
+    it('returns null for invalid token', () => {
+      expect(security.decode('invalid-token')).to.equal(null)
+    })
+
+    it('returns null for empty string', () => {
+      expect(security.decode('')).to.equal(null)
+    })
+
+    it('returns payload for valid token', () => {
+      const token = security.authorize({ userId: 1, email: 'test@test.com' })
+      const decoded = security.decode(token)
+      expect(decoded).to.not.equal(null)
+      expect(decoded.userId).to.equal(1)
+      expect(decoded.email).to.equal('test@test.com')
+    })
+  })
+
   describe('hash', () => {
     it('throws type error for for undefined input', () => {
       expect(() => security.hash()).to.throw(TypeError)
