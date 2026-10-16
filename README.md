@@ -50,6 +50,7 @@ For a detailed introduction, full list of features and architecture overview ple
     - [Gitpod](#gitpod)
 - [Demo](#demo)
 - [Documentation](#documentation)
+    - [Deliberately vulnerable training routes](#deliberately-vulnerable-training-routes)
     - [Node.js version compatibility](#nodejs-version-compatibility)
     - [Troubleshooting](#troubleshooting)
     - [Official companion guide](#official-companion-guide)
@@ -190,6 +191,24 @@ Feel free to have a look at the latest version of OWASP Juice Shop:
 > guaranteed uptime! Guaranteed stern looks if you break it!
 
 ## Documentation
+
+### Deliberately vulnerable training routes
+
+**Warning:** This fork includes additional intentionally vulnerable application
+endpoints for security-review and scanner demonstrations. They are enabled by
+default, require no authentication, and must only be used in an isolated training
+environment with synthetic data. Do not expose this application to real users or
+deploy it as a production service.
+
+| Endpoint | Deliberate vulnerability |
+|:---------|:-------------------------|
+| `GET /training/preview?message=Hello` | Reflected XSS: `message` is inserted into an HTML response without escaping or sanitization. |
+| `GET /training/redirect?to=https%3A%2F%2Fexample.invalid` | Open redirect: `to` controls the redirect destination without an allowlist, including external and protocol-relative URLs. |
+
+Missing or non-string parameters return HTTP 400; redirect destinations must also
+be non-empty. These routes do not award scoreboard challenges or change existing
+application routes. Their tests intentionally assert insecure behavior for
+demonstration purposes, not as a security guarantee.
 
 ### Node.js version compatibility
 

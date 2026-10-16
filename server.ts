@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: MIT
  */
 import dataErasure from './routes/dataErasure'
+import training from './routes/training'
 import fs = require('fs')
 import { type Request, type Response, type NextFunction } from 'express'
 import { sequelize } from './models'
@@ -611,6 +612,9 @@ restoreOverwrittenFilesWithOriginals().then(() => {
 
   /* Route for redirects */
   app.get('/redirect', redirect())
+
+  /* Deliberately vulnerable security-training endpoints */
+  app.use('/training', training)
 
   /* Routes for promotion video page */
   app.get('/promotion', videoHandler.promotionVideo())
